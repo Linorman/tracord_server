@@ -46,7 +46,10 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
         }
         List<PassageToFront> passageToFrontList = new ArrayList<>();
         for (PassageInfo passageInfo : passageInfoList) {
+            User user = userMapper.selectById(passageInfo.getUserId());
             PassageToFront passageToFront = new PassageToFront();
+            passageToFront.setAvatar(user.getAvatar());
+            passageToFront.setNickname(user.getNickName());
             passageToFront.setId(passageInfo.getId());
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
@@ -70,8 +73,8 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
                 }
                 LambdaQueryWrapper<User> queryWrapper2 = new LambdaQueryWrapper<>();
                 queryWrapper2.eq(User::getId, passageFollowerNumList.get(i).getFollowerId());
-                User user = userMapper.selectOne(queryWrapper2);
-                userToFrontList.add(new UserToFront(user.getId(),user.getAvatar()));
+                User user1 = userMapper.selectOne(queryWrapper2);
+                userToFrontList.add(new UserToFront(user1.getId(),user1.getAvatar()));
             }
             passageToFront.setUserList(userToFrontList);
             passageToFrontList.add(passageToFront);
@@ -90,7 +93,10 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
         }
         List<PassageToFront> passageToFrontList = new ArrayList<>();
         for (PassageInfo passageInfo : passageInfoList) {
+            User user = userMapper.selectById(passageInfo.getUserId());
             PassageToFront passageToFront = new PassageToFront();
+            passageToFront.setAvatar(user.getAvatar());
+            passageToFront.setNickname(user.getNickName());
             passageToFront.setId(passageInfo.getId());
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
@@ -229,7 +235,10 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
         }
         List<PassageToFront> passageToFrontList = new ArrayList<>();
         for (PassageInfo passageInfo : passageInfoList) {
+            User user = userMapper.selectById(passageInfo.getUserId());
             PassageToFront passageToFront = new PassageToFront();
+            passageToFront.setAvatar(user.getAvatar());
+            passageToFront.setNickname(user.getNickName());
             passageToFront.setId(passageInfo.getId());
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());

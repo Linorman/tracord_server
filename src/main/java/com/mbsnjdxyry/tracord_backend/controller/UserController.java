@@ -6,6 +6,7 @@ import com.mbsnjdxyry.tracord_backend.common.ResultCode;
 import com.mbsnjdxyry.tracord_backend.domain.User;
 import com.mbsnjdxyry.tracord_backend.exception.SystemException;
 import com.mbsnjdxyry.tracord_backend.service.UserService;
+import com.mbsnjdxyry.tracord_backend.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -94,43 +95,43 @@ public class UserController {
 
     /**
      * 关注用户
-     * @param userId
      * @param followerId
      * @return ResponseResult
      */
     @PostMapping("/followUser")
-    public ResponseResult followUser(Integer userId, Integer followerId) {
+    public ResponseResult followUser(Integer followerId) {
+        Integer userId = SecurityUtils.getUserId();
         return userService.followUser(userId, followerId);
     }
 
     /**
      * 取消关注用户
-     * @param userId
      * @param followerId
      * @return ResponseResult
      */
     @PostMapping("/unfollowUser")
-    public ResponseResult unfollowUser(Integer userId, Integer followerId) {
+    public ResponseResult unfollowUser(Integer followerId) {
+        Integer userId = SecurityUtils.getUserId();
         return userService.unfollowUser(userId, followerId);
     }
 
     /**
      * 获取用户关注列表
-     * @param userId
      * @return ResponseResult
      */
     @PostMapping("/getUserFollowList")
-    public ResponseResult getUserFollowList(Integer userId) {
+    public ResponseResult getUserFollowList() {
+        Integer userId = SecurityUtils.getUserId();
         return userService.getUserFollowList(userId);
     }
 
     /**
      * 获取用户关注数
-     * @param userId
      * @return ResponseResult
      */
     @PostMapping("/getUserFollowCount")
-    public ResponseResult getUserFollowCount(Integer userId) {
+    public ResponseResult getUserFollowCount() {
+        Integer userId = SecurityUtils.getUserId();
         return userService.getUserFollowCount(userId);
     }
 }

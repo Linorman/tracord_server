@@ -58,15 +58,15 @@ insert into tb_user values (null,'13813813813','admin','admin',0,'123',18,now(),
                            (null,'13813813814','admin','admin',0,'123',18,now(),now(),0),
                            (null,'13813813815','admin','admin',0,'123',18,now(),now(),0);
 
-insert into tb_passage values (null,1,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
-                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0);
+insert into tb_passage values (null,1,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),'5月21日',0);
 
 insert into tb_user_follower values (null,1,2,now()),
                                     (null,1,3,now()),
