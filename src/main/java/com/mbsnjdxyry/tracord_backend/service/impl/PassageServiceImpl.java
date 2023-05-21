@@ -14,6 +14,7 @@ import com.mbsnjdxyry.tracord_backend.mapper.PassageFollowerNumMapper;
 import com.mbsnjdxyry.tracord_backend.mapper.PassageInfoMapper;
 import com.mbsnjdxyry.tracord_backend.mapper.UserMapper;
 import com.mbsnjdxyry.tracord_backend.service.PassageService;
+import com.mbsnjdxyry.tracord_backend.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
+            passageToFront.setPhotoTime(passageInfo.getPhotoTime());
             passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
@@ -78,9 +80,10 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
     }
 
     @Override
-    public ResponseResult<List<PassageToFront>> getUserPassageList(User user) {
+    public ResponseResult<List<PassageToFront>> getUserPassageList() {
+        Integer userId = SecurityUtils.getUserId();
         LambdaQueryWrapper<PassageInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(PassageInfo::getUserId,user.getId());
+        queryWrapper.eq(PassageInfo::getUserId,userId);
         List<PassageInfo> passageInfoList = passageInfoMapper.selectList(queryWrapper);
         if (passageInfoList.isEmpty()){
             return ResponseResult.error(ResultCode.PASSAGE_LIST_NULL,null);
@@ -91,6 +94,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setId(passageInfo.getId());
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
+            passageToFront.setPhotoTime(passageInfo.getPhotoTime());
             passageToFront.setAddress(passageInfo.getAddress());
             passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
@@ -132,6 +136,8 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
 
     @Override
     public ResponseResult publishPassage(PassageInfo passageInfo) {
+        Integer userId = SecurityUtils.getUserId();
+        passageInfo.setUserId(userId);
         int result = passageInfoMapper.insert(passageInfo);
         if (result == 0){
             return ResponseResult.error(ResultCode.PASSAGE_ADD_ERROR,null);
@@ -228,6 +234,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
+            passageToFront.setPhotoTime(passageInfo.getPhotoTime());
             passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());

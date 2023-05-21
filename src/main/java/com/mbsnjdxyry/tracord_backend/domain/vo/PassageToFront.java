@@ -25,6 +25,7 @@ public class PassageToFront implements Serializable {
     private Integer followerNum;
     private String image;
     private Date createDate;
+    private String photoTime;
     private String address;
     private String content;
     private List<UserToFront> userList;

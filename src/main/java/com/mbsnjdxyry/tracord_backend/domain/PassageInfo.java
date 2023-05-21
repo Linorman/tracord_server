@@ -1,10 +1,7 @@
 package com.mbsnjdxyry.tracord_backend.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,9 +21,10 @@ public class PassageInfo implements Serializable {
     private Integer followerNum;
     private String image;
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @TableField(value = "create_date")
+    @TableField(value = "create_date", fill = FieldFill.INSERT)
     private Date createDate;
     private String address;
     private String content;
+    private String photoTime;
     private int delFlag;
 }

@@ -5,6 +5,8 @@ import com.mbsnjdxyry.tracord_backend.domain.PassageInfo;
 import com.mbsnjdxyry.tracord_backend.domain.User;
 import com.mbsnjdxyry.tracord_backend.domain.vo.PassageToFront;
 import com.mbsnjdxyry.tracord_backend.service.PassageService;
+import com.mbsnjdxyry.tracord_backend.utils.SecurityUtils;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +35,11 @@ public class PassageController {
 
     /**
      * 获取用户帖子列表
-     * @param user
      * @return ResponseResult
      */
     @PostMapping("/getUserPassageList")
-    public ResponseResult getUserPassageList(@RequestBody User user){
-        return passageService.getUserPassageList(user);
+    public ResponseResult getUserPassageList(){
+        return passageService.getUserPassageList();
     }
 
     /**
@@ -73,22 +74,24 @@ public class PassageController {
 
     /**
      * 点赞帖子
-     * @param map
+     * @param passageId
      * @return ResponseResult
      */
     @PostMapping("/followPassage")
-    public ResponseResult followPassage(@RequestBody Map<String, Integer> map){
-        return passageService.followPassage(map.get("userId"), map.get("passageId"));
+    public ResponseResult followPassage(Integer passageId){
+        val userId = SecurityUtils.getUserId();
+        return passageService.followPassage(userId, passageId);
     }
 
     /**
      * 取消点赞帖子
-     * @param map
+     * @param passageId
      * @return ResponseResult
      */
     @PostMapping("/unfollowPassage")
-    public ResponseResult unfollowPassage(@RequestBody Map<String, Integer> map){
-        return passageService.unfollowPassage(map.get("userId"), map.get("passageId"));
+    public ResponseResult unfollowPassage(Integer passageId){
+        val userId = SecurityUtils.getUserId();
+        return passageService.unfollowPassage(userId, passageId);
     }
 
     /**
@@ -113,21 +116,21 @@ public class PassageController {
 
     /**
      * 获取用户总点赞量
-     * @param userId
      * @return ResponseResult
      */
     @PostMapping("/getUserFollowNum")
-    public ResponseResult getTotalFollowerNum(Integer userId){
+    public ResponseResult getTotalFollowerNum(){
+        val userId = SecurityUtils.getUserId();
         return passageService.getTotalFollowerNum(userId);
     }
 
     /**
      * 获取用户总帖子量
-     * @param userId
      * @return ResponseResult
      */
     @PostMapping("/getUserPassageNum")
-    public ResponseResult getUserPassageNum(Integer userId){
+    public ResponseResult getUserPassageNum(){
+        val userId = SecurityUtils.getUserId();
         return passageService.getUserPassageNum(userId);
     }
 

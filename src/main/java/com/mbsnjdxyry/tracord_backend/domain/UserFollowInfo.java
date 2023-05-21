@@ -1,6 +1,7 @@
 package com.mbsnjdxyry.tracord_backend.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -22,6 +23,6 @@ public class UserFollowInfo implements Serializable {
     private Integer userId;
     private Integer followerId;
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @TableField(value = "create_date")
+    @TableField(value = "create_date", fill = FieldFill.INSERT)
     private Date createDate;
 }

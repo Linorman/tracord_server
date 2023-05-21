@@ -24,10 +24,9 @@ public interface PassageService extends IService<PassageInfo> {
 
     /**
      * 获取用户帖子列表
-     * @param user
      * @return ResponseResult
      */
-    public ResponseResult<List<PassageToFront>> getUserPassageList(User user);
+    public ResponseResult<List<PassageToFront>> getUserPassageList();
 
     /**
      * 根据帖子id获取帖子

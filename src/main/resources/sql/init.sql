@@ -40,6 +40,7 @@ create table tracord.tb_passage
     follower_num int default 0 null,
     address      varchar(50)   null,
     create_date  datetime      null,
+    photo_time   varchar(50)    null,
     del_flag     int default 0 not null
 );
 
@@ -52,3 +53,24 @@ create table tracord.tb_user_follower
     follower_id int           not null,
     create_date datetime      null
 );
+
+insert into tb_user values (null,'13813813813','admin','admin',0,'123',18,now(),now(),0),
+                           (null,'13813813814','admin','admin',0,'123',18,now(),now(),0),
+                           (null,'13813813815','admin','admin',0,'123',18,now(),now(),0);
+
+insert into tb_passage values (null,1,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,2,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0),
+                              (null,3,'hello world','http://www.baidu.com',0,'北京',now(),0);
+
+insert into tb_user_follower values (null,1,2,now()),
+                                    (null,1,3,now()),
+                                    (null,2,1,now()),
+                                    (null,2,3,now()),
+                                    (null,3,1,now()),
+                                    (null,3,2,now());
