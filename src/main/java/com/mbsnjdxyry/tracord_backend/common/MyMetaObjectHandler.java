@@ -9,6 +9,8 @@ import java.util.Date;
 
 /**
  * mybatis-plus的字段自动填充
+ * @data 2023/05/21
+ * @auther linorman
  */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
