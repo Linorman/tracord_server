@@ -121,4 +121,14 @@ public class PassageController {
         return passageService.getTotalFollowerNum(userId);
     }
 
+    /**
+     * 获取用户总帖子量
+     * @param userId
+     * @return ResponseResult
+     */
+    @PostMapping("/getUserPassageNum")
+    public ResponseResult getUserPassageNum(Integer userId){
+        return passageService.getUserPassageNum(userId);
+    }
+
 }
