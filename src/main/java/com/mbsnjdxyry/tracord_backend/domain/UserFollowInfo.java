@@ -16,7 +16,7 @@ import java.util.Date;
  * @auther linorman
  */
 @Data
-@TableName(value = "tb_user_follow")
+@TableName(value = "tb_user_follower")
 public class UserFollowInfo implements Serializable {
     @TableId(value = "id")
     private Integer id;

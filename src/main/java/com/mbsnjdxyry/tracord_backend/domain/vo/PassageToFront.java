@@ -23,6 +23,7 @@ public class PassageToFront implements Serializable {
     private Integer id;
     private Integer userId;
     private Integer followerNum;
+    private String avatar;
     private String image;
     private Date createDate;
     private String photoTime;
