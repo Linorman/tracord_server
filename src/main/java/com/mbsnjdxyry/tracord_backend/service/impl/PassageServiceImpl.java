@@ -242,4 +242,15 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
         }
         return ResponseResult.success(ResultCode.PASSAGE_LIST_GET_SUCCESS,passageToFrontList);
     }
+
+    @Override
+    public ResponseResult getTotalFollowerNum(Integer userId) {
+        LambdaQueryWrapper<PassageFollowerNum> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PassageFollowerNum::getFollowerId,userId);
+        List<PassageFollowerNum> passageFollowerNumList = passageFollowerNumMapper.selectList(queryWrapper);
+        if (passageFollowerNumList.isEmpty()){
+            return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,0);
+        }
+        return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,passageFollowerNumList.size());
+    }
 }

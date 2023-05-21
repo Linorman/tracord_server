@@ -78,4 +78,11 @@ public interface PassageService extends IService<PassageInfo> {
      */
     public ResponseResult<List<PassageToFront>> getPassageListByAddress(String address);
 
+    /**
+     * 获取总点赞量
+     * @param userId
+     * @return ResponseResult
+     */
+    public ResponseResult getTotalFollowerNum(Integer userId);
+
 }

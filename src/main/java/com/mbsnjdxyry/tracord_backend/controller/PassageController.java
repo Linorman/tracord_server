@@ -110,4 +110,14 @@ public class PassageController {
     public ResponseResult getPassageByAddress(@RequestBody String address){
         return passageService.getPassageListByAddress(address);
     }
+
+    /**
+     * 获取用户总点赞量
+     * @param userId
+     * @return ResponseResult
+     */
+    @PostMapping("/getUserFollowNum")
+    public ResponseResult getTotalFollowerNum(@RequestBody Integer userId){
+        return passageService.getTotalFollowerNum(userId);
+    }
 }
