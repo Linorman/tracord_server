@@ -134,5 +134,14 @@ public class UserController {
         Integer userId = SecurityUtils.getUserId();
         return userService.getUserFollowCount(userId);
     }
+
+    /**
+     * 获取用户关注用户所有帖子
+     * @return ResponseResult
+     */
+    @GetMapping("/getUserFollowPost")
+    public ResponseResult getUserFollowPost() {
+        return userService.getUserFollowPassage();
+    }
 }
 

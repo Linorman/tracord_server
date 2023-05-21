@@ -53,4 +53,10 @@ public interface UserService extends IService<User> {
      * @return ResponseResult
      */
     public ResponseResult getUserFollowCount(Integer userId);
+
+    /**
+     * 获取用户关注用户所有帖子
+     * @return ResponseResult
+     */
+    public ResponseResult getUserFollowPassage();
 }
