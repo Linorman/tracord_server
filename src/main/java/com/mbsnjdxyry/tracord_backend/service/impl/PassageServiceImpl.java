@@ -50,7 +50,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setPublishDate(passageInfo.getPublishDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -92,7 +92,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setPublishDate(passageInfo.getPublishDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -228,7 +228,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setPublishDate(passageInfo.getPublishDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
