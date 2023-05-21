@@ -42,3 +42,13 @@ create table tracord.tb_passage
     create_date  datetime      null,
     del_flag     int default 0 not null
 );
+
+drop table if exists tb_user_follower;
+create table tracord.tb_user_follower
+(
+    id          int auto_increment
+        primary key,
+    user_id     int           not null,
+    follower_id int           not null,
+    create_date datetime      null
+);

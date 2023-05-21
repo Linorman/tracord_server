@@ -8,8 +8,10 @@ import com.mbsnjdxyry.tracord_backend.common.ResponseResult;
 import com.mbsnjdxyry.tracord_backend.common.ResultCode;
 import com.mbsnjdxyry.tracord_backend.domain.LoginUser;
 import com.mbsnjdxyry.tracord_backend.domain.User;
+import com.mbsnjdxyry.tracord_backend.domain.UserFollowInfo;
 import com.mbsnjdxyry.tracord_backend.domain.vo.UserLoginVo;
 import com.mbsnjdxyry.tracord_backend.exception.SystemException;
+import com.mbsnjdxyry.tracord_backend.mapper.UserFollowInfoMapper;
 import com.mbsnjdxyry.tracord_backend.mapper.UserMapper;
 import com.mbsnjdxyry.tracord_backend.service.UserService;
 import com.mbsnjdxyry.tracord_backend.utils.JwtUtils;
@@ -23,6 +25,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static com.mbsnjdxyry.tracord_backend.common.RedisConstants.USER_LOGIN;
@@ -46,6 +51,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserFollowInfoMapper userFollowInfoMapper;
 
     /**
      * 用户注册
@@ -72,6 +80,72 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         save(user);
 //        4.添加用户
         return ResponseResult.success(REGISTER_SUCCESS,null);
+    }
+
+    @Override
+    public ResponseResult followUser(Integer userId, Integer followerId) {
+        if (userId == null || followerId == null){
+            return ResponseResult.error(FOLLOW_USER_NOT_NULL,null);
+        }
+        if (userId.equals(followerId)){
+            return ResponseResult.error(FOLLOW_USER_NOT_SELF,null);
+        }
+        if (userFollowInfoMapper.selectCount(new QueryWrapper<UserFollowInfo>()
+                .eq("user_id",userId)
+                .eq("follower_id",followerId)) > 0){
+            return ResponseResult.error(FOLLOW_USER_EXIST,null);
+        }
+        UserFollowInfo userFollowInfo = new UserFollowInfo();
+        userFollowInfo.setUserId(userId);
+        userFollowInfo.setFollowerId(followerId);
+        userFollowInfoMapper.insert(userFollowInfo);
+        return ResponseResult.success(FOLLOW_USER_SUCCESS,null);
+    }
+
+    @Override
+    public ResponseResult unfollowUser(Integer userId, Integer followerId) {
+        if (userId == null || followerId == null){
+            return ResponseResult.error(UNFOLLOW_USER_NOT_NULL,null);
+        }
+        if (userId.equals(followerId)){
+            return ResponseResult.error(UNFOLLOW_USER_NOT_SELF,null);
+        }
+        if (userFollowInfoMapper.selectCount(new QueryWrapper<UserFollowInfo>()
+                .eq("user_id",userId)
+                .eq("follower_id",followerId)) == 0){
+            return ResponseResult.error(UNFOLLOW_USER_NOT_EXIST,null);
+        }
+        userFollowInfoMapper.delete(new QueryWrapper<UserFollowInfo>()
+                .eq("user_id",userId)
+                .eq("follower_id",followerId));
+        return ResponseResult.success(UNFOLLOW_USER_SUCCESS,null);
+    }
+
+    @Override
+    public ResponseResult getUserFollowList(Integer userId) {
+        if (userId == null){
+            return ResponseResult.error(FOLLOWER_LIST_NULL,null);
+        }
+        List<UserFollowInfo> userFollowInfoList = userFollowInfoMapper.selectList(new QueryWrapper<UserFollowInfo>()
+                .eq("user_id",userId));
+        List<User> userList = new ArrayList<>();
+        for (UserFollowInfo userFollowInfo : userFollowInfoList) {
+            userList.add(getById(userFollowInfo.getFollowerId()));
+        }
+        if (userList.size() == 0){
+            return ResponseResult.error(FOLLOWER_LIST_NULL,null);
+        }
+        return ResponseResult.success(FOLLOWER_NUM_GET_SUCCESS,userList);
+    }
+
+    @Override
+    public ResponseResult getUserFollowCount(Integer userId) {
+        if (userId == null){
+            return ResponseResult.error(FOLLOWER_NUM_NULL,null);
+        }
+        Integer followedNum = userFollowInfoMapper.selectCount(new QueryWrapper<UserFollowInfo>()
+                .eq("follower_id",userId));
+        return ResponseResult.success(FOLLOWER_NUM_GET_SUCCESS,followedNum);
     }
 
     /**

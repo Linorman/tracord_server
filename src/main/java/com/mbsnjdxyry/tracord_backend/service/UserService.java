@@ -23,4 +23,34 @@ public interface UserService extends IService<User> {
     ResponseResult updateUserInfo(User user);
 
     ResponseResult userRegister(User user);
+
+    /**
+     * 关注用户
+     * @param userId
+     * @param followerId
+     * @return ResponseResult
+     */
+    public ResponseResult followUser(Integer userId, Integer followerId);
+
+    /**
+     * 取消关注用户
+     * @param userId
+     * @param followerId
+     * @return ResponseResult
+     */
+    public ResponseResult unfollowUser(Integer userId, Integer followerId);
+
+    /**
+     * 获取用户关注列表
+     * @param userId
+     * @return ResponseResult
+     */
+    public ResponseResult getUserFollowList(Integer userId);
+
+    /**
+     * 获取用户关注数
+     * @param userId
+     * @return ResponseResult
+     */
+    public ResponseResult getUserFollowCount(Integer userId);
 }
