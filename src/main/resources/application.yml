@@ -1,4 +1,3 @@
-
 # 阿里云OSS对象存储
 oss:
   #配置地域节点Endpoint
@@ -8,7 +7,7 @@ oss:
   bucketName: tracord
 
 server:
-  port: 8080
+  port: 8070
 spring:
   application:
     name: tracord_backend
