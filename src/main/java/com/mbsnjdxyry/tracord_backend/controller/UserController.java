@@ -92,6 +92,46 @@ public class UserController {
         return userService.updateUserInfo(user);
     }
 
+    /**
+     * 关注用户
+     * @param userId
+     * @param followerId
+     * @return ResponseResult
+     */
+    @PostMapping("/followUser")
+    public ResponseResult followUser(Integer userId, Integer followerId) {
+        return userService.followUser(userId, followerId);
+    }
 
+    /**
+     * 取消关注用户
+     * @param userId
+     * @param followerId
+     * @return ResponseResult
+     */
+    @PostMapping("/unfollowUser")
+    public ResponseResult unfollowUser(Integer userId, Integer followerId) {
+        return userService.unfollowUser(userId, followerId);
+    }
+
+    /**
+     * 获取用户关注列表
+     * @param userId
+     * @return ResponseResult
+     */
+    @PostMapping("/getUserFollowList")
+    public ResponseResult getUserFollowList(Integer userId) {
+        return userService.getUserFollowList(userId);
+    }
+
+    /**
+     * 获取用户关注数
+     * @param userId
+     * @return ResponseResult
+     */
+    @PostMapping("/getUserFollowCount")
+    public ResponseResult getUserFollowCount(Integer userId) {
+        return userService.getUserFollowCount(userId);
+    }
 }
 
