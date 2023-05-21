@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class PassageToFront implements Serializable {
     private Integer userId;
     private Integer followerNum;
     private String image;
-    private String publishDate;
+    private Date createDate;
     private String address;
     private String content;
     private List<UserToFront> userList;

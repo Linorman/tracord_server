@@ -50,7 +50,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getPublishDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -92,7 +92,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getPublishDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -210,10 +210,13 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             for (int i = 0; i < CityUtils.PROVINCE.length; i++) {
                 if (address.contains(CityUtils.PROVINCE[i])) {
                     address = CityUtils.getCityByProvince(CityUtils.PROVINCE[i]);
+                    flag = true;
                     break;
                 }
             }
-            return ResponseResult.error(ResultCode.PASSAGE_LIST_GET_ERROR,null);
+            if (!flag) {
+                return ResponseResult.error(ResultCode.PASSAGE_LIST_GET_ERROR, null);
+            }
         }
 
         queryWrapper.like(PassageInfo::getAddress,address);
@@ -228,7 +231,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getPublishDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
