@@ -22,4 +22,5 @@ public class PassageFollowerNum implements Serializable {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(value = "create_date")
     private String createDate;
+    private int delFlag;
 }

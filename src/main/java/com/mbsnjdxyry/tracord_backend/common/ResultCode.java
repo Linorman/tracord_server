@@ -21,10 +21,10 @@ public enum ResultCode {
     /**
      * 用户操作
      */
-    REGISTER_SUCCESS(201,"注册成功"),
-    LOGIN_SUCCESS(202,"登陆成功"),
-    LOGOUT_SUCCESS(203,"登出成功"),
-    UPDATE_SUCCESS(204,"更新成功"),
+    REGISTER_SUCCESS(221,"注册成功"),
+    LOGIN_SUCCESS(222,"登陆成功"),
+    LOGOUT_SUCCESS(223,"登出成功"),
+    UPDATE_SUCCESS(224,"更新成功"),
     NEED_LOGIN(420,"需要登陆后操作"),
     ACCOUNT_EXIST(421,"账号已存在"),
     REQUIRE_USERNAME(422,"账号不能为空"),

@@ -23,7 +23,7 @@ public class PassageInfo implements Serializable {
     private String image;
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @TableField(value = "create_date")
-    private String createDate;
+    private String publishDate;
     private String address;
     private String content;
     private int delFlag;

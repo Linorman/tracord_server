@@ -2,6 +2,7 @@ package com.mbsnjdxyry.tracord_backend.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mbsnjdxyry.tracord_backend.common.ResponseResult;
 import com.mbsnjdxyry.tracord_backend.common.ResultCode;
@@ -118,13 +119,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 //        3.判断用户是否存在
         if (Objects.isNull(one)) {
             //如果不存在就直接注册
-            User registerUser = new User();
-            registerUser.setAccount(account);
+            one = new User();
+            one.setAccount(account);
             //默认密码为 123456
-            registerUser.setPassword("123456");
-            userRegister(registerUser);
+            one.setPassword("123456");
+            userRegister(one);
+
+            //从数据库中取回id
+            LambdaQueryWrapper<User> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(User::getAccount,account);
+            one = getOne(queryWrapper1);
             //将token和用户信息封装返回
-            return ResponseResult.success(LOGIN_SUCCESS,registerUser);
+            //return ResponseResult.success(LOGIN_SUCCESS,registerUser);
         }
 //        4.获取到用户id
         String userId = one.getId().toString();
