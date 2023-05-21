@@ -127,7 +127,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.mbsnjdxyry.tracord_backend.TracordBackendApplication</mainClass>
-                    <skip>true</skip>
+<!--                    <skip>true</skip>-->
                 </configuration>
                 <executions>
                     <execution>
