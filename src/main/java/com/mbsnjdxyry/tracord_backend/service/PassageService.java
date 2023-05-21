@@ -91,5 +91,4 @@ public interface PassageService extends IService<PassageInfo> {
      * @return ResponseResult
      */
     public ResponseResult getUserPassageNum(Integer userId);
-
 }
