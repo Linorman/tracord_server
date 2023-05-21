@@ -214,9 +214,6 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
                     break;
                 }
             }
-            if (!flag) {
-                return ResponseResult.error(ResultCode.PASSAGE_LIST_GET_ERROR, null);
-            }
         }
 
         queryWrapper.like(PassageInfo::getAddress,address);
@@ -260,13 +257,17 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
 
     @Override
     public ResponseResult getTotalFollowerNum(Integer userId) {
-        LambdaQueryWrapper<PassageFollowerNum> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(PassageFollowerNum::getFollowerId,userId);
-        List<PassageFollowerNum> passageFollowerNumList = passageFollowerNumMapper.selectList(queryWrapper);
-        if (passageFollowerNumList.isEmpty()){
+        LambdaQueryWrapper<PassageInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PassageInfo::getUserId,userId);
+        List<PassageInfo> passageInfoList = passageInfoMapper.selectList(queryWrapper);
+        if (passageInfoList.isEmpty()){
             return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,0);
         }
-        return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,passageFollowerNumList.size());
+        int sum = 0;
+        for (int i = 0; i < passageInfoList.size(); i++) {
+            sum += passageInfoList.get(i).getFollowerNum();
+        }
+        return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,sum);
     }
 
     @Override

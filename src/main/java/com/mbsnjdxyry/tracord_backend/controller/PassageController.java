@@ -117,7 +117,7 @@ public class PassageController {
      * @return ResponseResult
      */
     @PostMapping("/getUserFollowNum")
-    public ResponseResult getTotalFollowerNum(@RequestBody Integer userId){
+    public ResponseResult getTotalFollowerNum(Integer userId){
         return passageService.getTotalFollowerNum(userId);
     }
 
