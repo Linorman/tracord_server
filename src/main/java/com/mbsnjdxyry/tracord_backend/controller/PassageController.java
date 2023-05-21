@@ -120,4 +120,5 @@ public class PassageController {
     public ResponseResult getTotalFollowerNum(@RequestBody Integer userId){
         return passageService.getTotalFollowerNum(userId);
     }
+
 }

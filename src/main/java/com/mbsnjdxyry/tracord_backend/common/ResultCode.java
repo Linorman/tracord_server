@@ -29,7 +29,9 @@ public enum ResultCode {
     PASSAGE_CANCEL_LIKE_ERROR(410, "帖子取消点赞失败"),
     PASSAGE_CANCEL_LIKE_SUCCESS(208, "帖子取消点赞成功"),
     PASSAGE_FOLLOWER_NUM_GET_SUCCESS(209, "帖子关注数获取成功"),
-    PASSAGE_FOLLOWER_NUM_GET_ERROR(411, "帖子关注数获取失败");
+    PASSAGE_FOLLOWER_NUM_GET_ERROR(411, "帖子关注数获取失败"),
+    PASSAGE_NUM_GET_SUCCESS(210, "帖子数获取成功"),
+    PASSAGE_NUM_GET_ERROR(412, "帖子数获取失败");
 
     private int code;
     private String msg;

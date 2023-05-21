@@ -1,5 +1,8 @@
 package com.mbsnjdxyry.tracord_backend.common;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CityUtils {
     public static final String[] CITY_NAMES = {
             "北京",
@@ -388,5 +391,77 @@ public class CityUtils {
             "香港",
             "澳门"
     };
+
+    public static Map<String, String> PROVINCE_CAPITAL_MAP = new HashMap<String, String>() {{
+        put("北京", "北京");
+        put("天津", "天津");
+        put("河北", "石家庄");
+        put("山西", "太原");
+        put("内蒙古自治区", "呼和浩特");
+        put("辽宁", "沈阳");
+        put("吉林", "长春");
+        put("黑龙江", "哈尔滨");
+        put("上海", "上海");
+        put("江苏", "南京");
+        put("浙江", "杭州");
+        put("安徽", "合肥");
+        put("福建", "福州");
+        put("江西", "南昌");
+        put("山东", "济南");
+        put("河南", "郑州");
+        put("湖北", "武汉");
+        put("湖南", "长沙");
+        put("广东", "广州");
+        put("广西壮族自治区", "南宁");
+        put("海南", "海口");
+        put("重庆", "重庆");
+        put("四川", "成都");
+        put("贵州", "贵阳");
+        put("云南", "昆明");
+        put("西藏自治区", "拉萨");
+        put("陕西", "西安");
+        put("甘肃", "兰州");
+        put("青海", "西宁");
+        put("宁夏回族自治区", "银川");
+        put("新疆维吾尔自治区", "乌鲁木齐");
+    }};
+
+    public static String[] PROVINCE = {
+            "北京",
+            "天津",
+            "河北",
+            "山西",
+            "内蒙古自治区",
+            "辽宁",
+            "吉林",
+            "黑龙江",
+            "上海",
+            "江苏",
+            "浙江",
+            "安徽",
+            "福建",
+            "江西",
+            "山东",
+            "河南",
+            "湖北",
+            "湖南",
+            "广东",
+            "广西壮族自治区",
+            "海南",
+            "重庆",
+            "四川",
+            "贵州",
+            "云南",
+            "西藏自治区",
+            "陕西",
+            "甘肃",
+            "青海",
+            "宁夏回族自治区",
+            "新疆维吾尔自治区"
+    };
+
+    public static String getCityByProvince(String province) {
+        return PROVINCE_CAPITAL_MAP.get(province);
+    }
 }
 

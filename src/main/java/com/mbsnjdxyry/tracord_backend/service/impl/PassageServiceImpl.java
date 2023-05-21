@@ -198,12 +198,24 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
     @Override
     public ResponseResult<List<PassageToFront>> getPassageListByAddress(String address) {
         LambdaQueryWrapper<PassageInfo> queryWrapper = new LambdaQueryWrapper<>();
+        boolean flag = true;
         for (int i = 0; i < CityUtils.CITY_NAMES.length; i++) {
             if (address.contains(CityUtils.CITY_NAMES[i])){
                 address = CityUtils.CITY_NAMES[i];
+                flag = false;
                 break;
             }
         }
+        if (!flag){
+            for (int i = 0; i < CityUtils.PROVINCE.length; i++) {
+                if (address.contains(CityUtils.PROVINCE[i])) {
+                    address = CityUtils.getCityByProvince(CityUtils.PROVINCE[i]);
+                    break;
+                }
+            }
+            return ResponseResult.error(ResultCode.PASSAGE_LIST_GET_ERROR,null);
+        }
+
         queryWrapper.like(PassageInfo::getAddress,address);
         List<PassageInfo> passageInfoList = passageInfoMapper.selectList(queryWrapper);
         if (passageInfoList.isEmpty()){
@@ -252,5 +264,16 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,0);
         }
         return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,passageFollowerNumList.size());
+    }
+
+    @Override
+    public ResponseResult getUserPassageNum(Integer userId) {
+        LambdaQueryWrapper<PassageInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PassageInfo::getUserId,userId);
+        List<PassageInfo> passageInfoList = passageInfoMapper.selectList(queryWrapper);
+        if (passageInfoList.isEmpty()){
+            return ResponseResult.success(ResultCode.PASSAGE_NUM_GET_SUCCESS,0);
+        }
+        return ResponseResult.success(ResultCode.PASSAGE_NUM_GET_SUCCESS,passageInfoList.size());
     }
 }

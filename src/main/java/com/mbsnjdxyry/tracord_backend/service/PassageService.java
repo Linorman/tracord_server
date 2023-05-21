@@ -85,4 +85,11 @@ public interface PassageService extends IService<PassageInfo> {
      */
     public ResponseResult getTotalFollowerNum(Integer userId);
 
+    /**
+     * 获取用户发布帖子数
+     * @param userId
+     * @return ResponseResult
+     */
+    public ResponseResult getUserPassageNum(Integer userId);
+
 }
