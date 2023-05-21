@@ -1,6 +1,7 @@
 package com.mbsnjdxyry.tracord_backend.domain;
 
 
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -62,7 +63,7 @@ public class User implements Serializable {
      * 更新时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @TableField(value = "update_date")
+    @TableField(value = "update_date",fill = FieldFill.UPDATE )
     private Date updateDate;
 
     /**

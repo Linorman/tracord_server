@@ -50,7 +50,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -92,7 +92,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -210,10 +210,10 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             for (int i = 0; i < CityUtils.PROVINCE.length; i++) {
                 if (address.contains(CityUtils.PROVINCE[i])) {
                     address = CityUtils.getCityByProvince(CityUtils.PROVINCE[i]);
+                    flag = true;
                     break;
                 }
             }
-            return ResponseResult.error(ResultCode.PASSAGE_LIST_GET_ERROR,null);
         }
 
         queryWrapper.like(PassageInfo::getAddress,address);
@@ -228,7 +228,7 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
             passageToFront.setUserId(passageInfo.getUserId());
             passageToFront.setContent(passageInfo.getContent());
             passageToFront.setAddress(passageInfo.getAddress());
-            passageToFront.setPublishDate(passageInfo.getCreateDate());
+            passageToFront.setCreateDate(passageInfo.getCreateDate());
             passageToFront.setImage(passageInfo.getImage());
             passageToFront.setFollowerNum(passageInfo.getFollowerNum());
             LambdaQueryWrapper<PassageFollowerNum> queryWrapper1 = new LambdaQueryWrapper<>();
@@ -257,13 +257,17 @@ public class PassageServiceImpl extends ServiceImpl<PassageInfoMapper, PassageIn
 
     @Override
     public ResponseResult getTotalFollowerNum(Integer userId) {
-        LambdaQueryWrapper<PassageFollowerNum> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(PassageFollowerNum::getFollowerId,userId);
-        List<PassageFollowerNum> passageFollowerNumList = passageFollowerNumMapper.selectList(queryWrapper);
-        if (passageFollowerNumList.isEmpty()){
+        LambdaQueryWrapper<PassageInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PassageInfo::getUserId,userId);
+        List<PassageInfo> passageInfoList = passageInfoMapper.selectList(queryWrapper);
+        if (passageInfoList.isEmpty()){
             return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,0);
         }
-        return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,passageFollowerNumList.size());
+        int sum = 0;
+        for (int i = 0; i < passageInfoList.size(); i++) {
+            sum += passageInfoList.get(i).getFollowerNum();
+        }
+        return ResponseResult.success(ResultCode.PASSAGE_FOLLOWER_NUM_GET_SUCCESS,sum);
     }
 
     @Override

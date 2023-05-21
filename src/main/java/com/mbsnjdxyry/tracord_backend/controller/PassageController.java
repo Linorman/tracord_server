@@ -117,8 +117,18 @@ public class PassageController {
      * @return ResponseResult
      */
     @PostMapping("/getUserFollowNum")
-    public ResponseResult getTotalFollowerNum(@RequestBody Integer userId){
+    public ResponseResult getTotalFollowerNum(Integer userId){
         return passageService.getTotalFollowerNum(userId);
+    }
+
+    /**
+     * 获取用户总帖子量
+     * @param userId
+     * @return ResponseResult
+     */
+    @PostMapping("/getUserPassageNum")
+    public ResponseResult getUserPassageNum(Integer userId){
+        return passageService.getUserPassageNum(userId);
     }
 
 }
