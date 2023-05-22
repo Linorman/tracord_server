@@ -9,7 +9,7 @@ create table tracord.tb_user
         primary key,
     account     varchar(50)   not null,
     nickname    varchar(50)   null,
-    avatar      varchar(50)   null,
+    avatar      varchar(255)   null,
     gender      int           null comment '0-96表示97种性别',
     password    varchar(255)  not null,
     age         int           null,
