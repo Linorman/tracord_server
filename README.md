@@ -3,6 +3,13 @@
 ### 一、介绍
 
 tracord项目的后端仓库。
+##### 项目环境：
+- JDK 1.8
+- Mysql 8.0.25
+- Redis 6.0.16
+- Docker 20.10.7
+- SpringBoot 2.7.6
+- MybatisPlus 3.4.3
 
 ### 二、软件架构
 
